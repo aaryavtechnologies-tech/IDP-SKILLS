@@ -275,9 +275,9 @@
     </section>
 
     <!-- ==========================================================================
-         Section 4: Video Testimonials and Success Stories (Shorts Carousel)
+         Section 4: Video Testimonials and Success Stories (Instagram Reels Style)
          ========================================================================== -->
-    <section class="section shorts-section" id="testimonials" aria-roledescription="carousel" aria-label="Real People Real Results Success Stories">
+    <section class="section shorts-section" id="testimonials" aria-label="Real People Real Results Success Stories">
       <div class="container">
         <div class="section-header fade-up-init">
           <span class="badge-pill">Video Testimonials</span>
@@ -285,132 +285,75 @@
           <p class="section-subtitle">Discover inspiring stories, real experiences, and the IDP journey directly from our community members.</p>
         </div>
 
-        <div class="shorts-carousel-wrapper">
-          <!-- Top Arrow Controls (Desktop / Tablet) -->
-          <div class="carousel-nav-controls">
-            <button type="button" class="carousel-arrow-btn" id="carousel-prev-btn" aria-label="Previous story" disabled>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button type="button" class="carousel-arrow-btn" id="carousel-next-btn" aria-label="Next story">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
-          </div>
+        <div class="reels-grid">
+          <!-- Reel 1: Sarukh -->
+          <article class="reel-card fade-up-init" id="reel-card-0">
+            <div class="reel-video-container-9x16">
+              <div class="reel-header-overlay">
+                <span class="short-tag-pill">STUDENT JOURNEY</span>
+              </div>
+              <iframe
+                id="yt-short-1"
+                class="reel-iframe"
+                src="https://www.youtube.com/embed/B10gWnKpgoA?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=B10gWnKpgoA&enablejsapi=1"
+                title="Sarukh's Success Journey"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="short-info-box">
+              <h3 class="short-author-name">Sarukh</h3>
+              <span class="short-story-highlight">From Zero to Success Journey</span>
+              <p class="short-quote">"Guidance and 1-on-1 mentorship made all the difference."</p>
+            </div>
+          </article>
 
-          <!-- Accessible Live Status for Screen Readers -->
-          <p class="visually-hidden" id="carousel-live-status" role="status" aria-live="polite">Slide 1 of 5: Sarukh's Success Journey</p>
+          <!-- Reel 2: Rahul Business Owner -->
+          <article class="reel-card fade-up-init" id="reel-card-1">
+            <div class="reel-video-container-9x16">
+              <div class="reel-header-overlay">
+                <span class="short-tag-pill">BUSINESS OWNER</span>
+              </div>
+              <iframe
+                id="yt-short-2"
+                class="reel-iframe"
+                src="https://www.youtube.com/embed/kfmXz1S4IsM?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=kfmXz1S4IsM&enablejsapi=1"
+                title="Rahul - Business Growth"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="short-info-box">
+              <h3 class="short-author-name">Rahul</h3>
+              <span class="short-story-highlight">Business Growth · Organic Scale</span>
+              <p class="short-quote">"Learned organic client acquisition without spending on ads."</p>
+            </div>
+          </article>
 
-          <!-- Scroll Snapping Track -->
-          <div class="shorts-track" id="shorts-track" role="group" aria-label="Video Testimonials Slider">
-            
-            <!-- Video 1: Sarukh -->
-            <article class="short-card" id="short-card-0" role="group" aria-roledescription="slide" aria-label="1 of 5">
-              <div class="short-video-container-9x16">
-                <div class="short-header-overlay">
-                  <span class="short-tag-pill">STUDENT JOURNEY</span>
-                  <button type="button" class="short-mute-btn" id="short-mute-0" aria-label="Toggle mute">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                  </button>
-                </div>
-                <div id="yt-short-1"></div>
-                <div class="short-poster-overlay" id="short-poster-0" style="background-image: url('https://i.ytimg.com/vi/B10gWnKpgoA/hqdefault.jpg');">
-                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                </div>
+          <!-- Reel 3: Pooja Housewife -->
+          <article class="reel-card fade-up-init" id="reel-card-2">
+            <div class="reel-video-container-9x16">
+              <div class="reel-header-overlay">
+                <span class="short-tag-pill">HOMEMAKER</span>
               </div>
-              <div class="short-info-box">
-                <h3 class="short-author-name">Sarukh</h3>
-                <span class="short-story-highlight">From Zero to Success Journey</span>
-                <p class="short-quote">"Guidance and 1-on-1 mentorship made all the difference."</p>
-              </div>
-            </article>
-
-            <!-- Video 2: Rahul Business Owner -->
-            <article class="short-card" id="short-card-1" role="group" aria-roledescription="slide" aria-label="2 of 5">
-              <div class="short-video-container-9x16">
-                <div class="short-header-overlay">
-                  <span class="short-tag-pill">BUSINESS OWNER</span>
-                  <button type="button" class="short-mute-btn" id="short-mute-1" aria-label="Toggle mute">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                  </button>
-                </div>
-                <div id="yt-short-2"></div>
-                <div class="short-poster-overlay" id="short-poster-1" style="background-image: url('https://i.ytimg.com/vi/kfmXz1S4IsM/hqdefault.jpg');">
-                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                </div>
-              </div>
-              <div class="short-info-box">
-                <h3 class="short-author-name">Rahul</h3>
-                <span class="short-story-highlight">Business Growth · Organic Scale</span>
-                <p class="short-quote">"Learned organic client acquisition without spending on ads."</p>
-              </div>
-            </article>
-
-            <!-- Video 3: Pooja Housewife -->
-            <article class="short-card" id="short-card-2" role="group" aria-roledescription="slide" aria-label="3 of 5">
-              <div class="short-video-container-9x16">
-                <div class="short-header-overlay">
-                  <span class="short-tag-pill">HOMEMAKER</span>
-                  <button type="button" class="short-mute-btn" id="short-mute-2" aria-label="Toggle mute">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                  </button>
-                </div>
-                <div id="yt-short-3"></div>
-                <div class="short-poster-overlay" id="short-poster-2" style="background-image: url('https://i.ytimg.com/vi/scMvuTBuanI/hqdefault.jpg');">
-                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                </div>
-              </div>
-              <div class="short-info-box">
-                <h3 class="short-author-name">Pooja</h3>
-                <span class="short-story-highlight">Financial Independence from Home</span>
-                <p class="short-quote">"Managed 2 hours daily alongside household responsibilities."</p>
-              </div>
-            </article>
-
-            <!-- Video 4: Aman Student -->
-            <article class="short-card" id="short-card-3" role="group" aria-roledescription="slide" aria-label="4 of 5">
-              <div class="short-video-container-9x16">
-                <div class="short-header-overlay">
-                  <span class="short-tag-pill">COLLEGE STUDENT</span>
-                  <button type="button" class="short-mute-btn" id="short-mute-3" aria-label="Toggle mute">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                  </button>
-                </div>
-                <div id="yt-short-4"></div>
-                <div class="short-poster-overlay" id="short-poster-3" style="background-image: url('https://i.ytimg.com/vi/9rmWN-xnZAo/hqdefault.jpg');">
-                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                </div>
-              </div>
-              <div class="short-info-box">
-                <h3 class="short-author-name">Aman</h3>
-                <span class="short-story-highlight">Student to Steady Earner</span>
-                <p class="short-quote">"Turned wasted screen time into practical digital income skills."</p>
-              </div>
-            </article>
-
-            <!-- Video 5: Kunal Transformation -->
-            <article class="short-card" id="short-card-4" role="group" aria-roledescription="slide" aria-label="5 of 5">
-              <div class="short-video-container-9x16">
-                <div class="short-header-overlay">
-                  <span class="short-tag-pill">3-MONTH MILESTONE</span>
-                  <button type="button" class="short-mute-btn" id="short-mute-4" aria-label="Toggle mute">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                  </button>
-                </div>
-                <div id="yt-short-5"></div>
-                <div class="short-poster-overlay" id="short-poster-4" style="background-image: url('https://i.ytimg.com/vi/srTf_2jnwdQ/hqdefault.jpg');">
-                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                </div>
-              </div>
-              <div class="short-info-box">
-                <h3 class="short-author-name">Kunal</h3>
-                <span class="short-story-highlight">Rapid Income Transformation</span>
-                <p class="short-quote">"The 30-day roadmap and ethical conversion methods worked."</p>
-              </div>
-            </article>
-
-          </div>
-
-          <!-- Carousel Dots Navigation -->
-          <nav class="carousel-markers-nav" id="carousel-markers" aria-label="Carousel pagination"></nav>
+              <iframe
+                id="yt-short-3"
+                class="reel-iframe"
+                src="https://www.youtube.com/embed/scMvuTBuanI?autoplay=1&mute=1&playsinline=1&controls=0&rel=0&modestbranding=1&loop=1&playlist=scMvuTBuanI&enablejsapi=1"
+                title="Pooja - Financial Independence"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="short-info-box">
+              <h3 class="short-author-name">Pooja</h3>
+              <span class="short-story-highlight">Financial Independence from Home</span>
+              <p class="short-quote">"Managed 2 hours daily alongside household responsibilities."</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
