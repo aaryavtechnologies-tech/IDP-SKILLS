@@ -1,7 +1,7 @@
 /**
- * IDP Landing Page - Video Players & Instagram Reels Controller
+ * IDP Landing Page - Video Players & Continuous Scroll Autoplay Controller
  * Integrates with YouTube IFrame Player API
- * Clean playback with sound and zero mute/unmute overlay buttons.
+ * Implements reliable scroll-triggered autoplay across all browsers (Desktop & Mobile).
  */
 
 (function () {
@@ -40,13 +40,11 @@
   // State Management
   let mainPlayer = null;
   const shortPlayers = {};
-  let isMainInViewport = false;
   let hasUserInteracted = false;
   let userReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // DOM Elements
   const mainVideoContainer = document.getElementById('featured-video-container');
-  const mainFallback = document.getElementById('main-video-fallback');
 
   /**
    * Safe YouTube API Loading
@@ -74,7 +72,67 @@
     initMainPlayer();
     initShortPlayers();
     setupIntersectionObservers();
+    setupScrollListener();
     setupAudioUnmuteInteraction();
+  }
+
+  /**
+   * Helper: Check if element is currently in viewport
+   */
+  function isElementInViewport(el, offset = 0) {
+    if (!el) return false;
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top < (windowHeight + offset) && rect.bottom > -offset;
+  }
+
+  /**
+   * Safe Video Play Helper: Guarantees video starts playing
+   */
+  function tryPlayVideo(player) {
+    if (!player || typeof player.playVideo !== 'function') return;
+    try {
+      if (hasUserInteracted) {
+        try {
+          player.unMute();
+          player.setVolume(100);
+        } catch (_) {}
+      } else {
+        try {
+          player.mute();
+        } catch (_) {}
+      }
+
+      const promise = player.playVideo();
+      if (promise && typeof promise.catch === 'function') {
+        promise.catch(() => {
+          // If browser restricted unmuted autoplay, mute and resume immediately
+          try {
+            if (typeof player.mute === 'function') {
+              player.mute();
+              player.playVideo();
+            }
+          } catch (_) {}
+        });
+      }
+    } catch (e) {
+      try {
+        if (typeof player.mute === 'function') {
+          player.mute();
+          player.playVideo();
+        }
+      } catch (_) {}
+    }
+  }
+
+  /**
+   * Safe Video Pause Helper
+   */
+  function pauseVideo(player) {
+    if (!player || typeof player.pauseVideo !== 'function') return;
+    try {
+      player.pauseVideo();
+    } catch (_) {}
   }
 
   /**
@@ -89,6 +147,7 @@
         videoId: MAIN_VIDEO_ID,
         playerVars: {
           autoplay: 1,
+          mute: 1,
           playsinline: 1,
           controls: 1,
           rel: 0,
@@ -98,36 +157,16 @@
         events: {
           onReady: function (event) {
             try {
-              event.target.unMute();
-              event.target.setVolume(100);
+              event.target.mute();
             } catch (_) {}
-            if (!userReducedMotion && isMainInViewport) {
+            if (!userReducedMotion && isElementInViewport(mainVideoContainer, 100)) {
               tryPlayVideo(event.target);
-            }
-          },
-          onStateChange: function (event) {
-            if (event.data === YT.PlayerState.PLAYING && mainFallback) {
-              mainFallback.classList.add('is-hidden');
             }
           }
         }
       });
     } catch (e) {
       console.warn('Error initializing main YouTube player:', e);
-    }
-
-    // Main Fallback Click
-    if (mainFallback) {
-      mainFallback.addEventListener('click', function () {
-        if (mainPlayer && typeof mainPlayer.playVideo === 'function') {
-          try {
-            mainPlayer.unMute();
-            mainPlayer.setVolume(100);
-          } catch (_) {}
-          mainPlayer.playVideo();
-          mainFallback.classList.add('is-hidden');
-        }
-      });
     }
   }
 
@@ -144,6 +183,7 @@
           videoId: short.id,
           playerVars: {
             autoplay: 1,
+            mute: 1,
             playsinline: 1,
             controls: 0,
             rel: 0,
@@ -155,10 +195,13 @@
           events: {
             onReady: function (event) {
               try {
-                event.target.unMute();
-                event.target.setVolume(100);
+                event.target.mute();
               } catch (_) {}
-              tryPlayVideo(event.target);
+              const card = document.getElementById(`reel-card-${index}`);
+              if (!userReducedMotion && card && isElementInViewport(card, 100)) {
+                card.classList.add('is-active-video');
+                tryPlayVideo(event.target);
+              }
             },
             onStateChange: function (event) {
               // Continuous Reels Loop
@@ -176,21 +219,125 @@
   }
 
   /**
-   * First User Interaction Audio Enabler: ensures audio plays with volume 100 on first gesture
+   * Setup Intersection Observers for Smooth Scroll Autoplay
+   */
+  function setupIntersectionObservers() {
+    // 1. Main Featured Video Observer
+    if (mainVideoContainer && 'IntersectionObserver' in window) {
+      const mainObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+              if (mainPlayer && !userReducedMotion) {
+                tryPlayVideo(mainPlayer);
+              }
+            } else {
+              if (mainPlayer) {
+                pauseVideo(mainPlayer);
+              }
+            }
+          });
+        },
+        { threshold: [0, 0.1, 0.25, 0.5], rootMargin: '60px 0px 60px 0px' }
+      );
+      mainObserver.observe(mainVideoContainer);
+    }
+
+    // 2. Reel Cards Observer
+    const reelCards = document.querySelectorAll('.reel-card, .short-card');
+    if (reelCards.length > 0 && 'IntersectionObserver' in window) {
+      const reelsObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            const card = entry.target;
+            const index = Array.from(reelCards).indexOf(card);
+            const player = shortPlayers[index];
+
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+              card.classList.add('is-active-video');
+              if (player && !userReducedMotion) {
+                tryPlayVideo(player);
+              }
+            } else {
+              card.classList.remove('is-active-video');
+              if (player) {
+                pauseVideo(player);
+              }
+            }
+          });
+        },
+        { threshold: [0, 0.1, 0.25, 0.5], rootMargin: '60px 0px 60px 0px' }
+      );
+
+      reelCards.forEach(card => reelsObserver.observe(card));
+    }
+  }
+
+  /**
+   * Scroll Event Backup: Ensures autoplay activates reliably as user scrolls
+   */
+  function setupScrollListener() {
+    let ticking = false;
+
+    function onScrollCheck() {
+      if (userReducedMotion) return;
+
+      // Check main video
+      if (mainVideoContainer && mainPlayer) {
+        if (isElementInViewport(mainVideoContainer, 60)) {
+          tryPlayVideo(mainPlayer);
+        } else {
+          pauseVideo(mainPlayer);
+        }
+      }
+
+      // Check reel cards
+      const reelCards = document.querySelectorAll('.reel-card, .short-card');
+      reelCards.forEach((card, idx) => {
+        const player = shortPlayers[idx];
+        if (!player) return;
+
+        if (isElementInViewport(card, 60)) {
+          card.classList.add('is-active-video');
+          tryPlayVideo(player);
+        } else {
+          card.classList.remove('is-active-video');
+          pauseVideo(player);
+        }
+      });
+
+      ticking = false;
+    }
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(onScrollCheck);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  /**
+   * Unmute Audio on First User Gesture
    */
   function setupAudioUnmuteInteraction() {
     function enableAudio() {
       if (hasUserInteracted) return;
       hasUserInteracted = true;
 
+      // Unmute main video
       if (mainPlayer && typeof mainPlayer.unMute === 'function') {
         try {
           mainPlayer.unMute();
           mainPlayer.setVolume(100);
-          mainPlayer.playVideo();
         } catch (_) {}
       }
 
+      // Unmute active reel players
       Object.values(shortPlayers).forEach(p => {
         try {
           if (typeof p.unMute === 'function') {
@@ -210,94 +357,6 @@
     window.addEventListener('touchstart', enableAudio, { capture: true, once: true });
     window.addEventListener('pointerdown', enableAudio, { capture: true, once: true });
     window.addEventListener('keydown', enableAudio, { capture: true, once: true });
-  }
-
-  /**
-   * Safe Video Play Helper
-   */
-  function tryPlayVideo(player) {
-    if (!player || typeof player.playVideo !== 'function') return;
-    try {
-      const promise = player.playVideo();
-      if (promise && typeof promise.catch === 'function') {
-        promise.catch(err => {
-          // Handled gracefully when browser restricts autoplay
-        });
-      }
-    } catch (e) {
-      // Ignore sync errors
-    }
-  }
-
-  function pauseVideo(player) {
-    if (!player || typeof player.pauseVideo !== 'function') return;
-    try {
-      player.pauseVideo();
-    } catch (e) {}
-  }
-
-  /**
-   * Intersection Observers for Viewport Detection
-   */
-  function setupIntersectionObservers() {
-    // 1. Observe Main Featured Video
-    if (mainVideoContainer) {
-      const mainObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            isMainInViewport = entry.isIntersecting && entry.intersectionRatio >= 0.25;
-            if (isMainInViewport) {
-              if (mainPlayer && !userReducedMotion) {
-                try {
-                  mainPlayer.unMute();
-                  mainPlayer.setVolume(100);
-                } catch (_) {}
-                tryPlayVideo(mainPlayer);
-              }
-            } else {
-              if (mainPlayer) {
-                pauseVideo(mainPlayer);
-              }
-            }
-          });
-        },
-        { threshold: [0, 0.25, 0.7] }
-      );
-      mainObserver.observe(mainVideoContainer);
-    }
-
-    // 2. Observe Each Reel Card individually for optimal Reels autoplay
-    const reelCards = document.querySelectorAll('.reel-card, .short-card');
-    if (reelCards.length > 0) {
-      const reelsObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            const card = entry.target;
-            const index = Array.from(reelCards).indexOf(card);
-            const player = shortPlayers[index];
-
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-              card.classList.add('is-active-video');
-              if (player && !userReducedMotion) {
-                try {
-                  player.unMute();
-                  player.setVolume(100);
-                } catch (_) {}
-                tryPlayVideo(player);
-              }
-            } else {
-              card.classList.remove('is-active-video');
-              if (player) {
-                pauseVideo(player);
-              }
-            }
-          });
-        },
-        { threshold: [0, 0.25, 0.6] }
-      );
-
-      reelCards.forEach(card => reelsObserver.observe(card));
-    }
   }
 
   // Kickstart
