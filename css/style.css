@@ -1772,8 +1772,10 @@ input, select, textarea {
 
 .mobile-sticky-btn {
   width: 100%;
-  padding: 0.85rem 1.5rem;
-  font-size: 0.95rem;
+  padding: 0.9rem 1.5rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 @media (max-width: 768px) {
