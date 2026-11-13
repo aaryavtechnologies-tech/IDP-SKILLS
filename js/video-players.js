@@ -1,7 +1,7 @@
 /**
- * IDP Landing Page - Video Players & Continuous Scroll Autoplay Controller
+ * IDP Landing Page - Video Players & Single-Active Audio/Video Controller
  * Integrates with YouTube IFrame Player API
- * Implements reliable scroll-triggered autoplay across all browsers (Desktop & Mobile).
+ * Enforces EXCLUSIVE single-video playback: ONLY ONE video/audio plays at any time.
  */
 
 (function () {
@@ -10,38 +10,20 @@
   // Video Configuration
   const MAIN_VIDEO_ID = 'BuX7INWrzcg';
   const SHORTS_CONFIG = [
-    {
-      id: 'B10gWnKpgoA',
-      elementId: 'yt-short-1',
-      author: 'Sarukh'
-    },
-    {
-      id: 'kfmXz1S4IsM',
-      elementId: 'yt-short-2',
-      author: 'Rahul'
-    },
-    {
-      id: 'scMvuTBuanI',
-      elementId: 'yt-short-3',
-      author: 'Pooja'
-    },
-    {
-      id: '9rmWN-xnZAo',
-      elementId: 'yt-short-4',
-      author: 'Aman'
-    },
-    {
-      id: 'srTf_2jnwdQ',
-      elementId: 'yt-short-5',
-      author: 'Kunal'
-    }
+    { id: 'B10gWnKpgoA', elementId: 'yt-short-1', cardId: 'reel-card-0', author: 'Sarukh' },
+    { id: 'kfmXz1S4IsM', elementId: 'yt-short-2', cardId: 'reel-card-1', author: 'Rahul' },
+    { id: 'scMvuTBuanI', elementId: 'yt-short-3', cardId: 'reel-card-2', author: 'Pooja' },
+    { id: '9rmWN-xnZAo', elementId: 'yt-short-4', cardId: 'reel-card-3', author: 'Aman' },
+    { id: 'srTf_2jnwdQ', elementId: 'yt-short-5', cardId: 'reel-card-4', author: 'Kunal' }
   ];
 
   // State Management
   let mainPlayer = null;
   const shortPlayers = {};
+  let currentActiveId = null; // 'main' or 0, 1, 2, 3, 4
   let hasUserInteracted = false;
   let userReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let scrollTicking = false;
 
   // DOM Elements
   const mainVideoContainer = document.getElementById('featured-video-container');
@@ -71,25 +53,15 @@
   function initPlayers() {
     initMainPlayer();
     initShortPlayers();
-    setupIntersectionObservers();
-    setupScrollListener();
+    setupCardInteractions();
+    setupScrollAndFocusManager();
     setupAudioUnmuteInteraction();
   }
 
   /**
-   * Helper: Check if element is currently in viewport
+   * Safe Video Play Helper
    */
-  function isElementInViewport(el, offset = 0) {
-    if (!el) return false;
-    const rect = el.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    return rect.top < (windowHeight + offset) && rect.bottom > -offset;
-  }
-
-  /**
-   * Safe Video Play Helper: Guarantees video starts playing
-   */
-  function tryPlayVideo(player) {
+  function tryPlay(player) {
     if (!player || typeof player.playVideo !== 'function') return;
     try {
       if (hasUserInteracted) {
@@ -103,24 +75,19 @@
         } catch (_) {}
       }
 
-      const promise = player.playVideo();
-      if (promise && typeof promise.catch === 'function') {
-        promise.catch(() => {
-          // If browser restricted unmuted autoplay, mute and resume immediately
+      const res = player.playVideo();
+      if (res && typeof res.catch === 'function') {
+        res.catch(() => {
           try {
-            if (typeof player.mute === 'function') {
-              player.mute();
-              player.playVideo();
-            }
+            player.mute();
+            player.playVideo();
           } catch (_) {}
         });
       }
-    } catch (e) {
+    } catch (_) {
       try {
-        if (typeof player.mute === 'function') {
-          player.mute();
-          player.playVideo();
-        }
+        player.mute();
+        player.playVideo();
       } catch (_) {}
     }
   }
@@ -133,6 +100,82 @@
     try {
       player.pauseVideo();
     } catch (_) {}
+  }
+
+  /**
+   * EXCLUSIVE Single-Player Playback
+   * Enforces that ONLY ONE video and audio stream plays at any moment.
+   */
+  function playExclusive(targetId) {
+    if (userReducedMotion) return;
+
+    if (currentActiveId === targetId && targetId !== null) {
+      const activePlayer = targetId === 'main' ? mainPlayer : shortPlayers[targetId];
+      if (activePlayer && typeof activePlayer.getPlayerState === 'function') {
+        const state = activePlayer.getPlayerState();
+        if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) {
+          tryPlay(activePlayer);
+        }
+      }
+      return;
+    }
+
+    currentActiveId = targetId;
+
+    // 1. Pause and mute main player if it's not the target
+    if (targetId !== 'main' && mainPlayer) {
+      pauseVideo(mainPlayer);
+      try {
+        mainPlayer.mute();
+      } catch (_) {}
+    }
+
+    // 2. Pause and mute all reels except the target
+    SHORTS_CONFIG.forEach((short, idx) => {
+      const card = document.getElementById(short.cardId);
+      const player = shortPlayers[idx];
+
+      if (targetId !== idx) {
+        if (card) card.classList.remove('is-active-video');
+        if (player) {
+          pauseVideo(player);
+          try {
+            player.mute();
+          } catch (_) {}
+        }
+      } else {
+        if (card) card.classList.add('is-active-video');
+      }
+    });
+
+    // 3. Play ONLY the target player
+    if (targetId === 'main' && mainPlayer) {
+      tryPlay(mainPlayer);
+    } else if (typeof targetId === 'number' && shortPlayers[targetId]) {
+      tryPlay(shortPlayers[targetId]);
+    }
+  }
+
+  /**
+   * Pause ALL videos when user scrolls out of video sections
+   */
+  function pauseAll() {
+    currentActiveId = null;
+    if (mainPlayer) {
+      pauseVideo(mainPlayer);
+      try {
+        mainPlayer.mute();
+      } catch (_) {}
+    }
+    Object.values(shortPlayers).forEach(p => {
+      if (p) {
+        pauseVideo(p);
+        try {
+          p.mute();
+        } catch (_) {}
+      }
+    });
+    document.querySelectorAll('.reel-card, .short-card').forEach(c => c.classList.remove('is-active-video'));
   }
 
   /**
@@ -155,12 +198,16 @@
           enablejsapi: 1
         },
         events: {
-          onReady: function (event) {
-            try {
-              event.target.mute();
-            } catch (_) {}
-            if (!userReducedMotion && isElementInViewport(mainVideoContainer, 100)) {
-              tryPlayVideo(event.target);
+          onReady: function () {
+            checkCurrentFocus();
+          },
+          onStateChange: function (event) {
+            // If visitor directly clicks play on the iframe, make it exclusive
+            if (event.data === YT.PlayerState.PLAYING) {
+              if (currentActiveId !== 'main') {
+                hasUserInteracted = true;
+                playExclusive('main');
+              }
             }
           }
         }
@@ -193,20 +240,22 @@
             playlist: short.id
           },
           events: {
-            onReady: function (event) {
-              try {
-                event.target.mute();
-              } catch (_) {}
-              const card = document.getElementById(`reel-card-${index}`);
-              if (!userReducedMotion && card && isElementInViewport(card, 100)) {
-                card.classList.add('is-active-video');
-                tryPlayVideo(event.target);
-              }
+            onReady: function () {
+              checkCurrentFocus();
             },
             onStateChange: function (event) {
-              // Continuous Reels Loop
+              // Continuous loop for active reel only
               if (event.data === YT.PlayerState.ENDED) {
-                event.target.playVideo();
+                if (currentActiveId === index) {
+                  event.target.playVideo();
+                }
+              }
+              // If visitor directly clicks play on this reel, make it exclusive
+              if (event.data === YT.PlayerState.PLAYING) {
+                if (currentActiveId !== index) {
+                  hasUserInteracted = true;
+                  playExclusive(index);
+                }
               }
             }
           }
@@ -219,133 +268,131 @@
   }
 
   /**
-   * Setup Intersection Observers for Smooth Scroll Autoplay
+   * Card Click & Hover Focus Switching
    */
-  function setupIntersectionObservers() {
-    // 1. Main Featured Video Observer
-    if (mainVideoContainer && 'IntersectionObserver' in window) {
-      const mainObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
-              if (mainPlayer && !userReducedMotion) {
-                tryPlayVideo(mainPlayer);
-              }
-            } else {
-              if (mainPlayer) {
-                pauseVideo(mainPlayer);
-              }
-            }
-          });
-        },
-        { threshold: [0, 0.1, 0.25, 0.5], rootMargin: '60px 0px 60px 0px' }
-      );
-      mainObserver.observe(mainVideoContainer);
-    }
+  function setupCardInteractions() {
+    SHORTS_CONFIG.forEach((short, index) => {
+      const card = document.getElementById(short.cardId);
+      if (!card) return;
 
-    // 2. Reel Cards Observer
-    const reelCards = document.querySelectorAll('.reel-card, .short-card');
-    if (reelCards.length > 0 && 'IntersectionObserver' in window) {
-      const reelsObserver = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            const card = entry.target;
-            const index = Array.from(reelCards).indexOf(card);
-            const player = shortPlayers[index];
+      // Click or tap switches audio & video to this reel immediately
+      card.addEventListener('click', () => {
+        hasUserInteracted = true;
+        playExclusive(index);
+      });
 
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
-              card.classList.add('is-active-video');
-              if (player && !userReducedMotion) {
-                tryPlayVideo(player);
-              }
-            } else {
-              card.classList.remove('is-active-video');
-              if (player) {
-                pauseVideo(player);
-              }
-            }
-          });
-        },
-        { threshold: [0, 0.1, 0.25, 0.5], rootMargin: '60px 0px 60px 0px' }
-      );
+      // Desktop hover switches focus smoothly
+      card.addEventListener('mouseenter', () => {
+        if (window.innerWidth >= 992) {
+          playExclusive(index);
+        }
+      });
+    });
 
-      reelCards.forEach(card => reelsObserver.observe(card));
+    if (mainVideoContainer) {
+      mainVideoContainer.addEventListener('click', () => {
+        hasUserInteracted = true;
+        playExclusive('main');
+      });
     }
   }
 
   /**
-   * Scroll Event Backup: Ensures autoplay activates reliably as user scrolls
+   * Viewport Center-Focus Algorithm:
+   * Finds the ONE video closest to the center of the user's screen.
    */
-  function setupScrollListener() {
-    let ticking = false;
+  function checkCurrentFocus() {
+    if (userReducedMotion) return;
 
-    function onScrollCheck() {
-      if (userReducedMotion) return;
+    const viewportCenterX = window.innerWidth / 2;
+    const viewportCenterY = window.innerHeight / 2;
+    const windowH = window.innerHeight;
 
-      // Check main video
-      if (mainVideoContainer && mainPlayer) {
-        if (isElementInViewport(mainVideoContainer, 60)) {
-          tryPlayVideo(mainPlayer);
-        } else {
-          pauseVideo(mainPlayer);
+    let closestId = null;
+    let minDistance = Infinity;
+
+    // 1. Check Main Video Container
+    if (mainVideoContainer && mainPlayer) {
+      const rect = mainVideoContainer.getBoundingClientRect();
+      const inView = rect.top < windowH * 0.85 && rect.bottom > windowH * 0.15;
+      if (inView) {
+        const centerY = (rect.top + rect.bottom) / 2;
+        const centerX = (rect.left + rect.right) / 2;
+        const dist = Math.hypot(centerX - viewportCenterX, (centerY - viewportCenterY) * 1.4);
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestId = 'main';
         }
       }
-
-      // Check reel cards
-      const reelCards = document.querySelectorAll('.reel-card, .short-card');
-      reelCards.forEach((card, idx) => {
-        const player = shortPlayers[idx];
-        if (!player) return;
-
-        if (isElementInViewport(card, 60)) {
-          card.classList.add('is-active-video');
-          tryPlayVideo(player);
-        } else {
-          card.classList.remove('is-active-video');
-          pauseVideo(player);
-        }
-      });
-
-      ticking = false;
     }
 
+    // 2. Check Each Reel Card
+    SHORTS_CONFIG.forEach((short, index) => {
+      const card = document.getElementById(short.cardId);
+      const player = shortPlayers[index];
+      if (!card || !player) return;
+
+      const rect = card.getBoundingClientRect();
+      const inView = rect.top < windowH * 0.85 && rect.bottom > windowH * 0.15;
+      if (inView) {
+        const centerY = (rect.top + rect.bottom) / 2;
+        const centerX = (rect.left + rect.right) / 2;
+        const dist = Math.hypot(centerX - viewportCenterX, (centerY - viewportCenterY) * 1.4);
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestId = index;
+        }
+      }
+    });
+
+    // 3. Apply Exclusive Playback
+    if (closestId !== null) {
+      playExclusive(closestId);
+    } else {
+      pauseAll();
+    }
+  }
+
+  /**
+   * Scroll and Intersection Manager
+   */
+  function setupScrollAndFocusManager() {
     window.addEventListener(
       'scroll',
       () => {
-        if (!ticking) {
-          window.requestAnimationFrame(onScrollCheck);
-          ticking = true;
+        if (!scrollTicking) {
+          window.requestAnimationFrame(() => {
+            checkCurrentFocus();
+            scrollTicking = false;
+          });
+          scrollTicking = true;
         }
       },
       { passive: true }
     );
+
+    window.addEventListener('resize', checkCurrentFocus, { passive: true });
   }
 
   /**
-   * Unmute Audio on First User Gesture
+   * Unmute Audio on First User Gesture (for currently active video only)
    */
   function setupAudioUnmuteInteraction() {
     function enableAudio() {
       if (hasUserInteracted) return;
       hasUserInteracted = true;
 
-      // Unmute main video
-      if (mainPlayer && typeof mainPlayer.unMute === 'function') {
+      if (currentActiveId === 'main' && mainPlayer) {
         try {
           mainPlayer.unMute();
           mainPlayer.setVolume(100);
         } catch (_) {}
-      }
-
-      // Unmute active reel players
-      Object.values(shortPlayers).forEach(p => {
+      } else if (typeof currentActiveId === 'number' && shortPlayers[currentActiveId]) {
         try {
-          if (typeof p.unMute === 'function') {
-            p.unMute();
-            p.setVolume(100);
-          }
+          shortPlayers[currentActiveId].unMute();
+          shortPlayers[currentActiveId].setVolume(100);
         } catch (_) {}
-      });
+      }
 
       window.removeEventListener('click', enableAudio, true);
       window.removeEventListener('touchstart', enableAudio, true);
