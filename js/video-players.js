@@ -1,7 +1,7 @@
 /**
- * IDP Landing Page - Video Players & Instagram Reels Autoplay Controller
+ * IDP Landing Page - Video Players & Instagram Reels Controller
  * Integrates with YouTube IFrame Player API
- * Implements IntersectionObserver visibility playback for continuous muted reels.
+ * Implements IntersectionObserver visibility playback for all 5 continuous reels with sound.
  */
 
 (function () {
@@ -13,20 +13,27 @@
     {
       id: 'B10gWnKpgoA',
       elementId: 'yt-short-1',
-      author: 'Sarukh',
-      highlight: 'From Zero to Success Journey'
+      author: 'Sarukh'
     },
     {
       id: 'kfmXz1S4IsM',
       elementId: 'yt-short-2',
-      author: 'Rahul',
-      highlight: 'Business Owner · Scaling Leads'
+      author: 'Rahul'
     },
     {
       id: 'scMvuTBuanI',
       elementId: 'yt-short-3',
-      author: 'Pooja',
-      highlight: 'Homemaker · Financial Independence'
+      author: 'Pooja'
+    },
+    {
+      id: '9rmWN-xnZAo',
+      elementId: 'yt-short-4',
+      author: 'Aman'
+    },
+    {
+      id: 'srTf_2jnwdQ',
+      elementId: 'yt-short-5',
+      author: 'Kunal'
     }
   ];
 
@@ -34,6 +41,7 @@
   let mainPlayer = null;
   const shortPlayers = {};
   let isMainInViewport = false;
+  let hasUserInteracted = false;
   let userReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // DOM Elements
@@ -67,6 +75,7 @@
     initMainPlayer();
     initShortPlayers();
     setupIntersectionObservers();
+    setupAudioUnmuteInteraction();
   }
 
   /**
@@ -112,7 +121,7 @@
         if (!mainPlayer || typeof mainPlayer.isMuted !== 'function') return;
         if (mainPlayer.isMuted()) {
           mainPlayer.unMute();
-          mainPlayer.setVolume(80);
+          mainPlayer.setVolume(85);
           mainSoundBtn.innerHTML = `
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
             <span>Sound On</span>
@@ -139,7 +148,7 @@
   }
 
   /**
-   * Initialize Shorts (Reels-style) Players
+   * Initialize Shorts (Instagram Reels-style) Players
    */
   function initShortPlayers() {
     SHORTS_CONFIG.forEach((short, index) => {
@@ -151,9 +160,9 @@
           videoId: short.id,
           playerVars: {
             autoplay: 1,
-            mute: 1,
+            mute: 1, // Start muted to satisfy browser autoplay requirements
             playsinline: 1,
-            controls: 0,
+            controls: 1, // Allow visitor full native YouTube volume & sound control
             rel: 0,
             modestbranding: 1,
             enablejsapi: 1,
@@ -181,6 +190,36 @@
   }
 
   /**
+   * First User Interaction Unmute: Unmutes sound as soon as user touches/clicks anywhere
+   */
+  function setupAudioUnmuteInteraction() {
+    function enableAudio() {
+      if (hasUserInteracted) return;
+      hasUserInteracted = true;
+
+      // Unmute active reel players
+      Object.values(shortPlayers).forEach(p => {
+        try {
+          if (typeof p.unMute === 'function') {
+            p.unMute();
+            p.setVolume(100);
+          }
+        } catch (_) {}
+      });
+
+      window.removeEventListener('click', enableAudio, true);
+      window.removeEventListener('touchstart', enableAudio, true);
+      window.removeEventListener('pointerdown', enableAudio, true);
+      window.removeEventListener('keydown', enableAudio, true);
+    }
+
+    window.addEventListener('click', enableAudio, { capture: true, once: true });
+    window.addEventListener('touchstart', enableAudio, { capture: true, once: true });
+    window.addEventListener('pointerdown', enableAudio, { capture: true, once: true });
+    window.addEventListener('keydown', enableAudio, { capture: true, once: true });
+  }
+
+  /**
    * Safe Video Play Helper
    */
   function tryPlayVideo(player) {
@@ -189,7 +228,7 @@
       const promise = player.playVideo();
       if (promise && typeof promise.catch === 'function') {
         promise.catch(err => {
-          // Handled gracefully when browser restricts autoplay
+          // Handled gracefully when browser restricts unmuted playback
         });
       }
     } catch (e) {
@@ -243,7 +282,12 @@
             if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
               card.classList.add('is-active-video');
               if (player && !userReducedMotion) {
-                player.mute();
+                if (hasUserInteracted) {
+                  try {
+                    player.unMute();
+                    player.setVolume(100);
+                  } catch (_) {}
+                }
                 tryPlayVideo(player);
               }
             } else {

@@ -949,17 +949,20 @@ input, select, textarea {
    ========================================================================== */
 .reels-grid,
 .shorts-grid-reels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.75rem;
-  max-width: 1060px;
+  max-width: 1140px;
   margin: 0 auto;
-  align-items: stretch;
 }
 
 /* 9:16 Reel Card */
 .reel-card,
 .short-card {
+  flex: 0 0 calc((100% - 2 * 1.75rem) / 3);
+  max-width: 340px;
+  min-width: 280px;
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
@@ -1065,6 +1068,11 @@ input, select, textarea {
   .reels-grid {
     gap: 1.25rem;
   }
+  .reel-card,
+  .short-card {
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+    max-width: 340px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1080,6 +1088,7 @@ input, select, textarea {
 
   .reel-card,
   .short-card {
+    flex: 1 1 100%;
     width: 100%;
     max-width: 360px;
   }
