@@ -863,12 +863,19 @@ input, select, textarea {
   margin-left: 0.2rem;
 }
 
-.stat-period {
-  font-size: 1.25rem;
-  font-weight: 700;
+.stat-heading-text {
+  font-size: clamp(2rem, 3.2vw, 2.65rem);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  line-height: 1.1;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.stat-heading-text .stat-accent {
   color: var(--primary-orange);
-  margin-left: 0.35rem;
-  white-space: nowrap;
 }
 
 .stat-label {
@@ -901,8 +908,8 @@ input, select, textarea {
   .stat-value {
     font-size: 2.25rem;
   }
-  .stat-period {
-    font-size: 1.1rem;
+  .stat-heading-text {
+    font-size: 2.1rem;
   }
 }
 
