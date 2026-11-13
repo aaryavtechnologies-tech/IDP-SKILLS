@@ -696,27 +696,8 @@ input, select, textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 60%;
-}
-
-.video-sound-toggle-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #FFFFFF;
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 600;
-  transition: all var(--transition-fast);
-}
-
-.video-sound-toggle-btn:hover {
-  background: var(--primary-orange);
-  border-color: var(--primary-orange);
-  color: #FFFFFF;
+  max-width: 85%;
+  text-align: right;
 }
 
 .video-container-16x9 {

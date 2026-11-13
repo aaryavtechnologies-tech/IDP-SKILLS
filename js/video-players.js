@@ -1,7 +1,7 @@
 /**
  * IDP Landing Page - Video Players & Instagram Reels Controller
  * Integrates with YouTube IFrame Player API
- * Implements IntersectionObserver visibility playback for all 5 continuous reels with sound.
+ * Clean playback with sound and zero mute/unmute overlay buttons.
  */
 
 (function () {
@@ -46,7 +46,6 @@
 
   // DOM Elements
   const mainVideoContainer = document.getElementById('featured-video-container');
-  const mainSoundBtn = document.getElementById('main-video-sound-btn');
   const mainFallback = document.getElementById('main-video-fallback');
 
   /**
@@ -90,7 +89,6 @@
         videoId: MAIN_VIDEO_ID,
         playerVars: {
           autoplay: 1,
-          mute: 1,
           playsinline: 1,
           controls: 1,
           rel: 0,
@@ -99,7 +97,10 @@
         },
         events: {
           onReady: function (event) {
-            event.target.mute();
+            try {
+              event.target.unMute();
+              event.target.setVolume(100);
+            } catch (_) {}
             if (!userReducedMotion && isMainInViewport) {
               tryPlayVideo(event.target);
             }
@@ -115,31 +116,14 @@
       console.warn('Error initializing main YouTube player:', e);
     }
 
-    // Main sound toggle
-    if (mainSoundBtn) {
-      mainSoundBtn.addEventListener('click', function () {
-        if (!mainPlayer || typeof mainPlayer.isMuted !== 'function') return;
-        if (mainPlayer.isMuted()) {
-          mainPlayer.unMute();
-          mainPlayer.setVolume(85);
-          mainSoundBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-            <span>Sound On</span>
-          `;
-        } else {
-          mainPlayer.mute();
-          mainSoundBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-            <span>Muted</span>
-          `;
-        }
-      });
-    }
-
     // Main Fallback Click
     if (mainFallback) {
       mainFallback.addEventListener('click', function () {
         if (mainPlayer && typeof mainPlayer.playVideo === 'function') {
+          try {
+            mainPlayer.unMute();
+            mainPlayer.setVolume(100);
+          } catch (_) {}
           mainPlayer.playVideo();
           mainFallback.classList.add('is-hidden');
         }
@@ -160,9 +144,8 @@
           videoId: short.id,
           playerVars: {
             autoplay: 1,
-            mute: 1, // Start muted to satisfy browser autoplay requirements
             playsinline: 1,
-            controls: 1, // Allow visitor full native YouTube volume & sound control
+            controls: 0,
             rel: 0,
             modestbranding: 1,
             enablejsapi: 1,
@@ -171,7 +154,10 @@
           },
           events: {
             onReady: function (event) {
-              event.target.mute();
+              try {
+                event.target.unMute();
+                event.target.setVolume(100);
+              } catch (_) {}
               tryPlayVideo(event.target);
             },
             onStateChange: function (event) {
@@ -190,14 +176,21 @@
   }
 
   /**
-   * First User Interaction Unmute: Unmutes sound as soon as user touches/clicks anywhere
+   * First User Interaction Audio Enabler: ensures audio plays with volume 100 on first gesture
    */
   function setupAudioUnmuteInteraction() {
     function enableAudio() {
       if (hasUserInteracted) return;
       hasUserInteracted = true;
 
-      // Unmute active reel players
+      if (mainPlayer && typeof mainPlayer.unMute === 'function') {
+        try {
+          mainPlayer.unMute();
+          mainPlayer.setVolume(100);
+          mainPlayer.playVideo();
+        } catch (_) {}
+      }
+
       Object.values(shortPlayers).forEach(p => {
         try {
           if (typeof p.unMute === 'function') {
@@ -228,7 +221,7 @@
       const promise = player.playVideo();
       if (promise && typeof promise.catch === 'function') {
         promise.catch(err => {
-          // Handled gracefully when browser restricts unmuted playback
+          // Handled gracefully when browser restricts autoplay
         });
       }
     } catch (e) {
@@ -255,6 +248,10 @@
             isMainInViewport = entry.isIntersecting && entry.intersectionRatio >= 0.25;
             if (isMainInViewport) {
               if (mainPlayer && !userReducedMotion) {
+                try {
+                  mainPlayer.unMute();
+                  mainPlayer.setVolume(100);
+                } catch (_) {}
                 tryPlayVideo(mainPlayer);
               }
             } else {
@@ -282,12 +279,10 @@
             if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
               card.classList.add('is-active-video');
               if (player && !userReducedMotion) {
-                if (hasUserInteracted) {
-                  try {
-                    player.unMute();
-                    player.setVolume(100);
-                  } catch (_) {}
-                }
+                try {
+                  player.unMute();
+                  player.setVolume(100);
+                } catch (_) {}
                 tryPlayVideo(player);
               }
             } else {
