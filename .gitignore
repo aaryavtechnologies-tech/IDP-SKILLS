@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment & OS files
+.DS_Store
+Thumbs.db
+
+# Test scripts & temp screenshots
+test-runner.js
+fullpage-screenshots.js
+*.png.tmp

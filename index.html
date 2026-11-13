@@ -1,299 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#050505" />
-  <meta name="description" content="IDP Affiliate System — How IDP Is Helping People Turn Their Skills into Online Income. Watch the IDP presentation by Gulshad Ahmad and real business reviews." />
-  <title>IDP Affiliate System | Gulshad Ahmad</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDP — Helping People Turn Their Skills Into Online Income</title>
+  <meta name="description" content="Discover how IDP and certified mentor Gulshad Ahmad help people turn practical digital skills into consistent online income through the government-verified IDP Affiliate System.">
+  <meta name="theme-color" content="#080808">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF632E'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>">
+  <meta property="og:title" content="IDP — Helping People Turn Their Skills Into Online Income">
+  <meta property="og:description" content="Watch real stories and learn how the IDP Affiliate System is transforming skills into sustainable online revenue.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "EducationalOrganization",
+        "@id": "https://highincomeskills.shop/#organization",
+        "name": "I Digital Preneur Pvt Ltd",
+        "alternateName": "IDP",
+        "description": "Government-verified EdTech organization helping people develop high-income digital skills and sustainable online revenue models.",
+        "url": "https://highincomeskills.shop"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://highincomeskills.shop/#mentor",
+        "name": "Gulshad Ahmad",
+        "jobTitle": "IDP Certified Mentor",
+        "description": "Ad Tech specialist and digital mentor guiding learners through the IDP Affiliate System.",
+        "image": "https://highincomeskills.shop/assets/gulshad-profile.png",
+        "sameAs": [
+          "https://instagram.com/gulshad.ahmad"
+        ]
+      },
+      {
+        "@type": "VideoObject",
+        "name": "How IDP Is Helping People Turn Their Skills Into Online Income",
+        "description": "Complete presentation and roadmap of the IDP Affiliate System by Gulshad Ahmad.",
+        "thumbnailUrl": "https://i.ytimg.com/vi/BuX7INWrzcg/maxresdefault.jpg",
+        "embedUrl": "https://www.youtube.com/embed/BuX7INWrzcg",
+        "uploadDate": "2026-06-01"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <!-- Top Announcement Bar -->
-  <header class="announcement-bar" role="banner">
-    <div class="announcement-marquee" aria-label="LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad">
-      <div class="announcement-track">
-        <span class="announcement-item">
-          <span class="announcement-dot" aria-hidden="true"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-        <span class="announcement-item" aria-hidden="true">
-          <span class="announcement-dot"></span>
-          LIVE SESSION - IDP Affiliate System - Free Call with Gulshad Ahmad
-        </span>
-      </div>
+
+  <!-- Ambient Light Backdrops -->
+  <div class="ambient-glow-bg" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- ==========================================================================
+       Site Header / Navigation
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-shell" aria-label="Main Navigation">
+        <a href="#hero" class="brand-logo" aria-label="IDP Home">
+          <div class="brand-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">IDP</span>
+            <span class="brand-tag">Govt. Verified EdTech</span>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#story" class="nav-link">Featured Story</a></li>
+          <li><a href="#results" class="nav-link">Business Impact</a></li>
+          <li><a href="#testimonials" class="nav-link">Real Results</a></li>
+          <li><a href="#system" class="nav-link">The 3-Step System</a></li>
+          <li><a href="#mentor" class="nav-link">Mentor</a></li>
+          <li><a href="#faqs" class="nav-link">FAQs</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button type="button" class="btn-primary nav-cta-btn open-consultation-btn">
+            <span>Book Consultation</span>
+          </button>
+          <button type="button" class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu-drawer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-menu-drawer" id="mobile-menu-drawer" aria-label="Mobile Navigation">
+      <ul class="mobile-nav-links">
+        <li><a href="#story">Featured Story</a></li>
+        <li><a href="#results">Business Impact</a></li>
+        <li><a href="#testimonials">Real Results & Shorts</a></li>
+        <li><a href="#system">The 3-Step System</a></li>
+        <li><a href="#mentor">Meet Mentor Gulshad</a></li>
+        <li><a href="#faqs">Frequently Asked Questions</a></li>
+      </ul>
+      <button type="button" class="btn-primary open-consultation-btn" style="width: 100%;">
+        <span>Book Free Consultation</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
     </div>
   </header>
 
-  <!-- Business Achievement Ticker Section -->
-  <section class="achievement-strip" aria-label="100Cr+ Business Generated by IDP">
-    <div class="achievement-marquee">
-      <div class="achievement-track">
-        <div class="achievement-item">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep" aria-hidden="true">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-        <div class="achievement-item" aria-hidden="true">
-          <span class="achievement-highlight">100Cr+</span>
-          <span class="achievement-text">Business Generated by IDP</span>
-          <span class="achievement-sep">&#8226;</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
+    <!-- ==========================================================================
+         Section 2: Hero Section
+         ========================================================================== -->
+    <section class="section hero-section" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <!-- Animated Badge -->
+          <div class="hero-badge-wrap">
+            <a href="#story" class="badge-pill">
+              <span class="pulse-dot"></span>
+              <span>Watch My Story</span>
+            </a>
+          </div>
 
-  <main class="page-main">
-    <!-- Hero Section -->
-    <section class="hero-section" aria-labelledby="hero-heading">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container hero-container">
-        <!-- Watch My Story Button -->
-        <div class="story-trigger-wrap reveal is-visible">
-          <a href="#video-presentation" id="watch-story-btn" class="watch-story-btn">
-            <span class="story-play-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11">
-                <path d="M8 5.14v14l11-7-11-7z" />
+          <!-- Main Heading -->
+          <h1 class="hero-title">
+            How IDP Is Helping People Turn Their <span class="text-orange-glow hero-underline-accent">Skills</span> Into <span class="text-orange-glow hero-underline-accent">Online Income</span>
+          </h1>
+
+          <!-- Supporting Paragraph -->
+          <p class="hero-desc">
+            Learn practical, high-income digital skills and build sustainable online opportunities with India's leading government-verified edtech platform. Master organic lead generation, ethical sales, and personal branding with 1-on-1 mentorship.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-cta-group">
+            <button type="button" class="btn-primary open-consultation-btn">
+              <span>Book Free Consultation</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <a href="https://wa.me/919005747128?text=Hello%20Gulshad%20Sir%2C%0AI%20am%20interested%20in%20the%20IDP%20Affiliate%20System.%0APlease%20guide%20me." target="_blank" rel="noopener noreferrer" class="btn-secondary btn-whatsapp-style">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
               </svg>
-            </span>
-            <span>Watch My Story</span>
-          </a>
-        </div>
-
-        <!-- Main Hero Headline -->
-        <h1 id="hero-heading" class="hero-headline reveal is-visible">
-          How IDP Is Helping People Turn Their
-          <span class="text-orange">Skills</span>
-          <span class="text-orange">into Online Income</span>
-        </h1>
-      </div>
-    </section>
-
-    <!-- Video Presentation Section -->
-    <section id="video-presentation" class="presentation-section" aria-labelledby="presentation-title">
-      <div class="presentation-ambient-glow" aria-hidden="true"></div>
-      <div class="container">
-        <div class="presentation-card reveal is-visible">
-          <div class="video-frame-16x9">
-            <iframe
-              id="yt-player-main"
-              class="yt-autoplay-iframe"
-              src="https://www.youtube.com/embed/BuX7INWrzcg?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=BuX7INWrzcg&enablejsapi=1"
-              title="IDP presentation - Gulshad Ahmad"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
 
-          <div class="presentation-meta">
-            <div class="presentation-title-group">
-              <span class="live-indicator" aria-hidden="true"></span>
-              <h2 id="presentation-title" class="presentation-title">IDP presentation</h2>
+          <!-- Trust Bar -->
+          <div class="hero-trust-bar">
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Government Verified EdTech</span>
             </div>
-            <p class="presentation-presenter">Gulshad Ahmad</p>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>1-on-1 Personal Mentorship</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>400+ Students Mentored</span>
+            </div>
           </div>
-        </div>
-
-        <div class="section-cta-wrap reveal is-visible">
-          <a href="tel:+919005747128" class="contact-cta-btn" aria-label="Contact Us by phone at 9005747128">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-            <span>Contact Us</span>
-          </a>
         </div>
       </div>
     </section>
 
-    <!-- Business Reviews Section -->
-    <section id="business-reviews" class="reviews-section" aria-labelledby="reviews-heading">
-      <div class="reviews-glow" aria-hidden="true"></div>
+    <!-- ==========================================================================
+         Section 3: Featured Story Video
+         ========================================================================== -->
+    <section class="section featured-video-section" id="story">
       <div class="container">
-        <div class="reviews-header reveal">
-          <span class="reviews-label">Business Reviews</span>
-          <h2 id="reviews-heading" class="reviews-headline">
-            Real People. <span class="text-orange">Real Results.</span>
-          </h2>
+        <div class="featured-video-frame fade-up-init" id="featured-video-container">
+          <div class="video-inner-bezel">
+            <!-- Top Controls Bar -->
+            <div class="video-top-bar">
+              <div class="video-badge">
+                <span class="pulse-dot"></span>
+                <span>Featured Story</span>
+              </div>
+              <span class="video-title-label">IDP Affiliate System · Complete Presentation & Roadmap</span>
+              <button type="button" class="video-sound-toggle-btn" id="main-video-sound-btn" aria-label="Toggle sound">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <span>Muted</span>
+              </button>
+            </div>
+
+            <!-- 16:9 Video Player Container -->
+            <div class="video-container-16x9">
+              <div id="main-yt-iframe"></div>
+
+              <!-- Attractive Fallback Poster & Play Button -->
+              <div class="video-fallback-overlay" id="main-video-fallback" style="background-image: url('https://i.ytimg.com/vi/BuX7INWrzcg/maxresdefault.jpg');">
+                <div class="video-play-btn-circle" role="button" aria-label="Play Featured Video">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                <p class="video-fallback-text">Click to Play Featured Presentation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 5: Business Results and Social Proof
+         ========================================================================== -->
+    <section class="section results-strip-section" id="results">
+      <div class="container">
+        <div class="section-header fade-up-init">
+          <span class="badge-pill">Verified Data · Real Impact</span>
+          <h2 class="section-title">The Scale Behind The System</h2>
+          <p class="section-subtitle">Real verified benchmarks achieved across the IDP ecosystem and mentor-led client communities.</p>
         </div>
 
-        <div class="shorts-grid">
-          <article class="short-card reveal">
-            <div class="video-frame-9x16">
-              <iframe
-                id="yt-player-short-1"
-                class="yt-autoplay-iframe yt-short-iframe"
-                src="https://www.youtube.com/embed/9rmWN-xnZAo?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=9rmWN-xnZAo&enablejsapi=1"
-                title="IDP Business Review Short 1"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+        <div class="stats-grid">
+          <!-- Stat 1 -->
+          <div class="stat-card fade-up-init">
+            <div class="stat-number-wrap">
+              <span class="stat-value" data-counter-target="100">100</span>
+              <span class="stat-suffix">Cr+</span>
             </div>
-          </article>
+            <div class="stat-label">Business Generated by IDP</div>
+            <div class="stat-subtext">Across India's digital ecosystem</div>
+          </div>
 
-          <article class="short-card reveal">
-            <div class="video-frame-9x16">
-              <iframe
-                id="yt-player-short-2"
-                class="yt-autoplay-iframe yt-short-iframe"
-                src="https://www.youtube.com/embed/srTf_2jnwdQ?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=srTf_2jnwdQ&enablejsapi=1"
-                title="IDP Business Review Short 2"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+          <!-- Stat 2 -->
+          <div class="stat-card fade-up-init">
+            <div class="stat-number-wrap">
+              <span class="stat-value" data-counter-target="1000">1,000</span>
+              <span class="stat-suffix">+</span>
             </div>
-          </article>
+            <div class="stat-label">Active Enrolled Clients</div>
+            <div class="stat-subtext">Learning practical digital skills</div>
+          </div>
 
-          <article class="short-card reveal">
-            <div class="video-frame-9x16">
-              <iframe
-                id="yt-player-short-3"
-                class="yt-autoplay-iframe yt-short-iframe"
-                src="https://www.youtube.com/embed/scMvuTBuanI?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=scMvuTBuanI&enablejsapi=1"
-                title="IDP Business Review Short 3"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+          <!-- Stat 3 -->
+          <div class="stat-card fade-up-init">
+            <div class="stat-number-wrap">
+              <span class="stat-value" data-counter-target="6">6</span>
+              <span class="stat-suffix">L+</span>
             </div>
-          </article>
+            <div class="stat-label">By Mentor's Direct Clients</div>
+            <div class="stat-subtext">Direct mentor-assisted results</div>
+          </div>
 
-          <article class="short-card reveal">
-            <div class="video-frame-9x16">
-              <iframe
-                id="yt-player-short-4"
-                class="yt-autoplay-iframe yt-short-iframe"
-                src="https://www.youtube.com/embed/kfmXz1S4IsM?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=kfmXz1S4IsM&enablejsapi=1"
-                title="IDP Business Review Short 4"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+          <!-- Stat 4 -->
+          <div class="stat-card fade-up-init">
+            <div class="stat-number-wrap">
+              <span class="stat-value" data-counter-target="4.9">4.9</span>
+              <span class="stat-suffix">★</span>
             </div>
-          </article>
+            <div class="stat-label">Student Satisfaction Rating</div>
+            <div class="stat-subtext">Rated by 400+ learners</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <article class="short-card reveal">
-            <div class="video-frame-9x16">
-              <iframe
-                id="yt-player-short-5"
-                class="yt-autoplay-iframe yt-short-iframe"
-                src="https://www.youtube.com/embed/B10gWnKpgoA?autoplay=1&mute=1&playsinline=1&controls=1&rel=0&loop=1&playlist=B10gWnKpgoA&enablejsapi=1"
-                title="IDP Business Review Short 5"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </article>
+    <!-- ==========================================================================
+         Section 4: Video Testimonials and Success Stories (Shorts Carousel)
+         ========================================================================== -->
+    <section class="section shorts-section" id="testimonials" aria-roledescription="carousel" aria-label="Real People Real Results Success Stories">
+      <div class="container">
+        <div class="section-header fade-up-init">
+          <span class="badge-pill">Video Testimonials</span>
+          <h2 class="section-title">Real People. <span class="text-orange-glow">Real Results.</span></h2>
+          <p class="section-subtitle">Discover inspiring stories, real experiences, and the IDP journey directly from our community members.</p>
         </div>
 
-        <div class="section-cta-wrap section-cta-bottom reveal">
-          <a href="tel:+919005747128" class="contact-cta-btn" aria-label="Contact Us by phone at 9005747128">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="19" height="19" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-            </svg>
-            <span>Contact Us</span>
-          </a>
+        <div class="shorts-carousel-wrapper">
+          <!-- Top Arrow Controls (Desktop / Tablet) -->
+          <div class="carousel-nav-controls">
+            <button type="button" class="carousel-arrow-btn" id="carousel-prev-btn" aria-label="Previous story" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="carousel-arrow-btn" id="carousel-next-btn" aria-label="Next story">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Accessible Live Status for Screen Readers -->
+          <p class="visually-hidden" id="carousel-live-status" role="status" aria-live="polite">Slide 1 of 5: Sarukh's Success Journey</p>
+
+          <!-- Scroll Snapping Track -->
+          <div class="shorts-track" id="shorts-track" role="group" aria-label="Video Testimonials Slider">
+            
+            <!-- Video 1: Sarukh -->
+            <article class="short-card" id="short-card-0" role="group" aria-roledescription="slide" aria-label="1 of 5">
+              <div class="short-video-container-9x16">
+                <div class="short-header-overlay">
+                  <span class="short-tag-pill">STUDENT JOURNEY</span>
+                  <button type="button" class="short-mute-btn" id="short-mute-0" aria-label="Toggle mute">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  </button>
+                </div>
+                <div id="yt-short-1"></div>
+                <div class="short-poster-overlay" id="short-poster-0" style="background-image: url('https://i.ytimg.com/vi/B10gWnKpgoA/hqdefault.jpg');">
+                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                </div>
+              </div>
+              <div class="short-info-box">
+                <h3 class="short-author-name">Sarukh</h3>
+                <span class="short-story-highlight">From Zero to Success Journey</span>
+                <p class="short-quote">"Guidance and 1-on-1 mentorship made all the difference."</p>
+              </div>
+            </article>
+
+            <!-- Video 2: Rahul Business Owner -->
+            <article class="short-card" id="short-card-1" role="group" aria-roledescription="slide" aria-label="2 of 5">
+              <div class="short-video-container-9x16">
+                <div class="short-header-overlay">
+                  <span class="short-tag-pill">BUSINESS OWNER</span>
+                  <button type="button" class="short-mute-btn" id="short-mute-1" aria-label="Toggle mute">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  </button>
+                </div>
+                <div id="yt-short-2"></div>
+                <div class="short-poster-overlay" id="short-poster-1" style="background-image: url('https://i.ytimg.com/vi/kfmXz1S4IsM/hqdefault.jpg');">
+                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                </div>
+              </div>
+              <div class="short-info-box">
+                <h3 class="short-author-name">Rahul</h3>
+                <span class="short-story-highlight">Business Growth · Organic Scale</span>
+                <p class="short-quote">"Learned organic client acquisition without spending on ads."</p>
+              </div>
+            </article>
+
+            <!-- Video 3: Pooja Housewife -->
+            <article class="short-card" id="short-card-2" role="group" aria-roledescription="slide" aria-label="3 of 5">
+              <div class="short-video-container-9x16">
+                <div class="short-header-overlay">
+                  <span class="short-tag-pill">HOMEMAKER</span>
+                  <button type="button" class="short-mute-btn" id="short-mute-2" aria-label="Toggle mute">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  </button>
+                </div>
+                <div id="yt-short-3"></div>
+                <div class="short-poster-overlay" id="short-poster-2" style="background-image: url('https://i.ytimg.com/vi/scMvuTBuanI/hqdefault.jpg');">
+                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                </div>
+              </div>
+              <div class="short-info-box">
+                <h3 class="short-author-name">Pooja</h3>
+                <span class="short-story-highlight">Financial Independence from Home</span>
+                <p class="short-quote">"Managed 2 hours daily alongside household responsibilities."</p>
+              </div>
+            </article>
+
+            <!-- Video 4: Aman Student -->
+            <article class="short-card" id="short-card-3" role="group" aria-roledescription="slide" aria-label="4 of 5">
+              <div class="short-video-container-9x16">
+                <div class="short-header-overlay">
+                  <span class="short-tag-pill">COLLEGE STUDENT</span>
+                  <button type="button" class="short-mute-btn" id="short-mute-3" aria-label="Toggle mute">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  </button>
+                </div>
+                <div id="yt-short-4"></div>
+                <div class="short-poster-overlay" id="short-poster-3" style="background-image: url('https://i.ytimg.com/vi/9rmWN-xnZAo/hqdefault.jpg');">
+                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                </div>
+              </div>
+              <div class="short-info-box">
+                <h3 class="short-author-name">Aman</h3>
+                <span class="short-story-highlight">Student to Steady Earner</span>
+                <p class="short-quote">"Turned wasted screen time into practical digital income skills."</p>
+              </div>
+            </article>
+
+            <!-- Video 5: Kunal Transformation -->
+            <article class="short-card" id="short-card-4" role="group" aria-roledescription="slide" aria-label="5 of 5">
+              <div class="short-video-container-9x16">
+                <div class="short-header-overlay">
+                  <span class="short-tag-pill">3-MONTH MILESTONE</span>
+                  <button type="button" class="short-mute-btn" id="short-mute-4" aria-label="Toggle mute">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                  </button>
+                </div>
+                <div id="yt-short-5"></div>
+                <div class="short-poster-overlay" id="short-poster-4" style="background-image: url('https://i.ytimg.com/vi/srTf_2jnwdQ/hqdefault.jpg');">
+                  <div class="short-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                </div>
+              </div>
+              <div class="short-info-box">
+                <h3 class="short-author-name">Kunal</h3>
+                <span class="short-story-highlight">Rapid Income Transformation</span>
+                <p class="short-quote">"The 30-day roadmap and ethical conversion methods worked."</p>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Carousel Dots Navigation -->
+          <nav class="carousel-markers-nav" id="carousel-markers" aria-label="Carousel pagination"></nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section: The 3-Step IDP Blueprint
+         ========================================================================== -->
+    <section class="section system-section" id="system">
+      <div class="container">
+        <div class="section-header fade-up-init">
+          <span class="badge-pill">The Roadmap</span>
+          <h2 class="section-title">How The <span class="text-orange-glow">IDP System</span> Works</h2>
+          <p class="section-subtitle">A clear, mentor-led blueprint designed to take complete beginners from zero to consistent online income.</p>
+        </div>
+
+        <div class="system-grid">
+          <!-- Step 1 -->
+          <div class="system-card fade-up-init">
+            <span class="module-number-badge">MODULE 01</span>
+            <h3 class="system-title">IDP Affiliate System Explained</h3>
+            <ul class="system-points-list">
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Government-verified EdTech model & regulatory compliance</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Step-by-step breakdown of how the affiliate revenue engine operates</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Transparent commission structure and timely payout cycle</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Structured 30-day starter roadmap for non-technical beginners</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="system-card fade-up-init">
+            <span class="module-number-badge">MODULE 02</span>
+            <h3 class="system-title">Content & Brand Engine Setup</h3>
+            <ul class="system-points-list">
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Select your high-conversion niche and ideal target audience</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Generate daily qualified organic leads on Instagram, WhatsApp & YouTube</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Build genuine credibility and trust instead of chasing viral vanity metrics</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Simple, repeatable weekly content plan you can execute from your smartphone</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="system-card fade-up-init">
+            <span class="module-number-badge">MODULE 03</span>
+            <h3 class="system-title">Leads → Sales → Income Engine</h3>
+            <ul class="system-points-list">
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Ethical DM and call conversion frameworks without high-pressure tactics</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Automated follow-up sequences that double lead conversion rates</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Building leverage and long-term recurring revenue streams</span>
+              </li>
+              <li class="system-point-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Direct 1-on-1 mentorship sessions with Gulshad Ahmad</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section: Certified Mentor Spotlight
+         ========================================================================== -->
+    <section class="section mentor-section" id="mentor">
+      <div class="container">
+        <div class="mentor-card-shell fade-up-init">
+          <div class="mentor-img-wrap">
+            <div class="mentor-photo-frame">
+              <img src="assets/gulshad-profile.png" alt="Gulshad Ahmad - Certified IDP Mentor" class="mentor-photo" width="360" height="414">
+              <div class="mentor-badge-float">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary-orange)" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <span>IDP Certified Mentor</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mentor-info-col">
+            <span class="mentor-role-label">Your Dedicated Guide</span>
+            <h2 class="mentor-name">Gulshad Ahmad</h2>
+            <p class="mentor-tagline">
+              2+ years in Ad Tech & Digital Performance. Passionate about guiding beginners, students, and working professionals to achieve financial clarity and repeatable online income.
+            </p>
+
+            <div class="mentor-stats-row">
+              <div class="mentor-stat-item">
+                <span class="mentor-stat-num">6-Figure</span>
+                <span class="mentor-stat-lbl">Monthly Earner</span>
+              </div>
+              <div class="mentor-stat-item">
+                <span class="mentor-stat-num">400+</span>
+                <span class="mentor-stat-lbl">Students Mentored</span>
+              </div>
+              <div class="mentor-stat-item">
+                <span class="mentor-stat-num">4.9 ★</span>
+                <span class="mentor-stat-lbl">Community Rating</span>
+              </div>
+            </div>
+
+            <div class="mentor-social-connect">
+              <button type="button" class="btn-primary open-consultation-btn">
+                <span>Book 1-on-1 Call</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <a href="https://instagram.com/gulshad.ahmad" target="_blank" rel="noopener noreferrer" class="social-pill-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <span>@gulshad.ahmad</span>
+              </a>
+              <span class="social-pill-link">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                <span>4.2K Followers</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section: Problems Faced by Beginners Solved
+         ========================================================================== -->
+    <section class="section problems-section">
+      <div class="container">
+        <div class="section-header fade-up-init">
+          <span class="badge-pill">Roadblocks Removed</span>
+          <h2 class="section-title">Are You Facing <span class="text-orange-glow">These Challenges?</span></h2>
+          <p class="section-subtitle">Most people want to earn online but hit the same predictable roadblocks. Here is how IDP helps you overcome them.</p>
+        </div>
+
+        <div class="problems-grid">
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Working hard every day but income remains stagnant without growth opportunities.</p>
+          </div>
+
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Wanting to build online income but not knowing which practical skills actually generate revenue.</p>
+          </div>
+
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Purchased generic recorded courses before but got zero results due to lack of real support.</p>
+          </div>
+
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Feeling the absence of a genuine, verified system and an approachable mentor who replies.</p>
+          </div>
+
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Stuck in a rigid 9-to-9 daily cycle with neither time freedom nor location flexibility.</p>
+          </div>
+
+          <div class="problem-card fade-up-init">
+            <div class="problem-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <p class="problem-text">Tried affiliate programs alone and felt overwhelmed without a tested conversion roadmap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section: Frequently Asked Questions
+         ========================================================================== -->
+    <section class="section faq-section" id="faqs">
+      <div class="container">
+        <div class="section-header fade-up-init">
+          <span class="badge-pill">Common Questions</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Everything you need to know about IDP, mentorship, and getting started.</p>
+        </div>
+
+        <div class="faq-accordion-list">
+          <!-- FAQ 1 -->
+          <div class="faq-item fade-up-init">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>Is this suitable for absolute beginners?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer-pane">
+              <div class="faq-answer-content">
+                Yes, absolutely. The system is designed from the ground up for people starting with zero background in marketing or tech. You are given a step-by-step 30-day starter roadmap and direct guidance so you always know your next action.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item fade-up-init">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>Do I need to pay for the consultation call?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer-pane">
+              <div class="faq-answer-content">
+                No. The 1-on-1 consultation with Gulshad Ahmad is 100% free with no obligation. We understand your current situation, explain the IDP framework transparently, and see if the program is the right fit for you.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item fade-up-init">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>How does the 1-on-1 mentorship work?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer-pane">
+              <div class="faq-answer-content">
+                You receive direct access to Gulshad Ahmad via WhatsApp and personal consultation calls. Whenever you hit a question regarding content, lead generation, or closing conversations, you receive actionable feedback.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item fade-up-init">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>How much time do I need to invest daily?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer-pane">
+              <div class="faq-answer-content">
+                Investing 2 to 3 hours consistently each day using your phone is enough to implement the system. Many learners start part-time alongside college or a full-time job.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item fade-up-init">
+            <button type="button" class="faq-question-btn" aria-expanded="false">
+              <span>Is IDP an authentic and verified company?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer-pane">
+              <div class="faq-answer-content">
+                Yes. I Digital Preneur Pvt Ltd is a government-verified EdTech organization registered in India. Over 1,000+ active learners and clients are actively participating and building practical digital competencies.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 6: Conversion and Consultation Section (Closing CTA)
+         ========================================================================== -->
+    <section class="section closing-cta-section" id="consultation">
+      <div class="container">
+        <div class="cta-banner-shell fade-up-init">
+          <div class="cta-banner-content">
+            <div class="hero-badge-wrap">
+              <span class="badge-pill">Limited Consultation Slots</span>
+            </div>
+            <h2 class="cta-heading">Ready to Turn Your Skills Into Opportunities?</h2>
+            <p class="cta-subheading">
+              Take the next step in your learning journey and explore how IDP can help you develop practical skills. Book a free 1-on-1 consultation call with certified mentor Gulshad Ahmad today.
+            </p>
+
+            <div class="cta-actions">
+              <button type="button" class="btn-primary open-consultation-btn">
+                <span>Book Free Consultation →</span>
+              </button>
+              <a href="https://wa.me/919005747128?text=Hello%20Gulshad%20Sir%2C%0AI%20am%20interested%20in%20the%20IDP%20Affiliate%20System.%0APlease%20guide%20me." target="_blank" rel="noopener noreferrer" class="btn-secondary btn-whatsapp-style">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                <span>Message Directly on WhatsApp</span>
+              </a>
+            </div>
+
+            <p class="cta-reassurance">✓ 100% Free Consultation · No high-pressure sales · Transparent Guidance</p>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Floating WhatsApp Button (Fixed Bottom-Right) -->
-  <a
-    href="https://wa.me/919005747128?text=Hello%20Gulshad%20Sir%2C%20I%20am%20interested%20in%20the%20IDP%20Affiliate%20System.%20Please%20guide%20me."
-    target="_blank"
-    rel="noopener noreferrer"
-    class="floating-whatsapp-btn"
-    aria-label="Chat on WhatsApp"
-    title="WhatsApp Us"
-  >
-    <svg viewBox="0 0 32 32" fill="currentColor" width="30" height="30" aria-hidden="true">
-      <path d="M16.002 3C8.832 3 3 8.832 3 16c0 2.456.69 4.85 1.996 6.924L3.06 29l6.245-1.884A12.94 12.94 0 0 0 16.002 29C23.168 29 29 23.168 29 16S23.168 3 16.002 3zm0 23.625a10.58 10.58 0 0 1-5.405-1.482l-.388-.231-3.706 1.118 1.137-3.613-.253-.403A10.576 10.576 0 0 1 5.375 16c0-5.861 4.766-10.625 10.627-10.625 5.86 0 10.623 4.764 10.623 10.625S21.862 26.625 16.002 26.625zm5.826-7.96c-.319-.16-1.889-.932-2.182-1.038-.292-.107-.505-.16-.718.16-.213.319-.824 1.038-1.01 1.251-.186.213-.372.24-.691.08-.319-.16-1.348-.497-2.568-1.585-.949-.846-1.59-1.891-1.776-2.21-.186-.32-.02-.493.14-.652.143-.143.319-.372.479-.558.159-.186.212-.319.319-.532.106-.213.053-.399-.027-.558-.08-.16-.718-1.73-.984-2.369-.259-.622-.522-.538-.718-.548-.186-.009-.399-.011-.612-.011s-.558.08-.851.399c-.292.319-1.117 1.091-1.117 2.661s1.143 3.087 1.303 3.3c.16.213 2.25 3.435 5.451 4.817.761.329 1.356.525 1.819.672.764.243 1.46.209 2.01.127.613-.092 1.889-.772 2.155-1.518.266-.745.266-1.384.186-1.517-.08-.133-.292-.213-.612-.372z" />
+  <!-- ==========================================================================
+       Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="brand-icon-box" style="width: 30px; height: 30px; border-radius: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
+          <span class="footer-legal-tag">I Digital Preneur Pvt Ltd · Government Verified EdTech Company</span>
+        </div>
+        <p class="footer-copyright">© 2026 IDP & Gulshad Ahmad. All rights reserved. Helping people build digital capabilities.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Section 7: Floating WhatsApp Button
+       ========================================================================== -->
+  <a href="https://wa.me/919005747128?text=Hello%20Gulshad%20Sir%2C%0AI%20am%20interested%20in%20the%20IDP%20Affiliate%20System.%0APlease%20guide%20me." target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" aria-label="Chat with Gulshad Ahmad on WhatsApp">
+    <span class="floating-whatsapp-tooltip">Chat with Gulshad on WhatsApp</span>
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
   </a>
 
-  <!-- Mobile Sticky Bottom CTA Bar -->
-  <nav class="mobile-sticky-cta" aria-label="Quick Contact Actions">
-    <a
-      href="https://wa.me/919005747128?text=Hello%20Gulshad%20Sir%2C%20I%20am%20interested%20in%20the%20IDP%20Affiliate%20System.%20Please%20guide%20me."
-      target="_blank"
-      rel="noopener noreferrer"
-      class="sticky-btn sticky-btn-whatsapp"
-    >
-      <svg viewBox="0 0 32 32" fill="currentColor" width="20" height="20" aria-hidden="true">
-        <path d="M16.002 3C8.832 3 3 8.832 3 16c0 2.456.69 4.85 1.996 6.924L3.06 29l6.245-1.884A12.94 12.94 0 0 0 16.002 29C23.168 29 29 23.168 29 16S23.168 3 16.002 3zm0 23.625a10.58 10.58 0 0 1-5.405-1.482l-.388-.231-3.706 1.118 1.137-3.613-.253-.403A10.576 10.576 0 0 1 5.375 16c0-5.861 4.766-10.625 10.627-10.625 5.86 0 10.623 4.764 10.623 10.625S21.862 26.625 16.002 26.625zm5.826-7.96c-.319-.16-1.889-.932-2.182-1.038-.292-.107-.505-.16-.718.16-.213.319-.824 1.038-1.01 1.251-.186.213-.372.24-.691.08-.319-.16-1.348-.497-2.568-1.585-.949-.846-1.59-1.891-1.776-2.21-.186-.32-.02-.493.14-.652.143-.143.319-.372.479-.558.159-.186.212-.319.319-.532.106-.213.053-.399-.027-.558-.08-.16-.718-1.73-.984-2.369-.259-.622-.522-.538-.718-.548-.186-.009-.399-.011-.612-.011s-.558.08-.851.399c-.292.319-1.117 1.091-1.117 2.661s1.143 3.087 1.303 3.3c.16.213 2.25 3.435 5.451 4.817.761.329 1.356.525 1.819.672.764.243 1.46.209 2.01.127.613-.092 1.889-.772 2.155-1.518.266-.745.266-1.384.186-1.517-.08-.133-.292-.213-.612-.372z" />
-      </svg>
-      <span>WhatsApp Us</span>
-    </a>
+  <!-- ==========================================================================
+       Section 8: Sticky Mobile CTA Bar
+       ========================================================================== -->
+  <aside class="mobile-sticky-cta-bar" aria-label="Quick Action">
+    <button type="button" class="btn-primary mobile-sticky-btn open-consultation-btn">
+      <span>Book Free Consultation →</span>
+    </button>
+  </aside>
 
-    <a href="tel:+919005747128" class="sticky-btn sticky-btn-call">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-      </svg>
-      <span>Call Now</span>
-    </a>
-  </nav>
+  <!-- ==========================================================================
+       Consultation Modal (<dialog>) - Native HTML Dialog
+       ========================================================================== -->
+  <dialog id="consultation-dialog" aria-labelledby="dialog-title" closedby="any">
+    <div class="modal-header">
+      <h3 class="modal-title" id="dialog-title">Book Free Consultation</h3>
+      <button type="button" class="modal-close-btn" id="close-dialog-btn" aria-label="Close consultation modal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
 
-  <script src="script.js"></script>
+    <form class="modal-form" id="consultation-form">
+      <div class="form-group">
+        <label for="consult-name" class="form-label">Full Name</label>
+        <input type="text" id="consult-name" class="form-input" placeholder="e.g. Rahul Sharma" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-phone" class="form-label">WhatsApp Number</label>
+        <input type="tel" id="consult-phone" class="form-input" placeholder="e.g. +91 98765 43210" required>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-role" class="form-label">Current Background</label>
+        <select id="consult-role" class="form-select" required>
+          <option value="College Student">College Student</option>
+          <option value="Working Professional">Working Professional</option>
+          <option value="Business Owner">Business Owner</option>
+          <option value="Homemaker">Homemaker</option>
+          <option value="Freelancer / Job Seeker">Freelancer / Job Seeker</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="consult-slot" class="form-label">Preferred Time Slot</label>
+        <select id="consult-slot" class="form-select">
+          <option value="Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM - 1:00 PM)</option>
+          <option value="Afternoon (1:00 PM - 5:00 PM)">Afternoon (1:00 PM - 5:00 PM)</option>
+          <option value="Evening (5:00 PM - 9:00 PM)">Evening (5:00 PM - 9:00 PM)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-primary form-submit-btn">
+        <span>Connect With Gulshad on WhatsApp →</span>
+      </button>
+
+      <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 0.25rem;">
+        Direct 1-on-1 consultation · No spam · Instant WhatsApp connection
+      </p>
+    </form>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="js/video-players.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
+
