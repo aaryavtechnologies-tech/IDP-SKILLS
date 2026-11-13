@@ -232,12 +232,7 @@
         const slot = document.getElementById('consult-slot')?.value || 'Flexible';
 
         const mentorPhone = '919005747128';
-        const textMessage = `Hello Gulshad Sir,
-My name is ${name}.
-I am a ${role} interested in the IDP Affiliate System.
-Phone: ${phone}
-Preferred Consultation Time: ${slot}
-Please guide me with the 1-on-1 mentorship roadmap.`;
+        const textMessage = 'Hello';
 
         const waUrl = `https://wa.me/${mentorPhone}?text=${encodeURIComponent(textMessage)}`;
 
