@@ -863,6 +863,14 @@ input, select, textarea {
   margin-left: 0.2rem;
 }
 
+.stat-period {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  margin-left: 0.35rem;
+  white-space: nowrap;
+}
+
 .stat-label {
   font-size: 0.95rem;
   font-weight: 600;
@@ -892,6 +900,9 @@ input, select, textarea {
   }
   .stat-value {
     font-size: 2.25rem;
+  }
+  .stat-period {
+    font-size: 1.1rem;
   }
 }
 
