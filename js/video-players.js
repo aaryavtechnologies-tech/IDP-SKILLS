@@ -2,6 +2,7 @@
  * IDP Landing Page - Video Players & Single-Active Audio/Video Controller
  * Integrates with YouTube IFrame Player API
  * Enforces EXCLUSIVE single-video playback: ONLY ONE video/audio plays at any time.
+ * Supports instant scroll autoplay for Featured Story and Testimonial Reels.
  */
 
 (function () {
@@ -54,8 +55,11 @@
     initMainPlayer();
     initShortPlayers();
     setupCardInteractions();
+    setupIntersectionObservers();
     setupScrollAndFocusManager();
     setupAudioUnmuteInteraction();
+    // Run initial focus check
+    setTimeout(checkCurrentFocus, 200);
   }
 
   /**
@@ -187,19 +191,17 @@
 
     try {
       mainPlayer = new YT.Player('main-yt-iframe', {
-        videoId: MAIN_VIDEO_ID,
-        playerVars: {
-          autoplay: 1,
-          mute: 1,
-          playsinline: 1,
-          controls: 1,
-          rel: 0,
-          modestbranding: 1,
-          enablejsapi: 1
-        },
         events: {
-          onReady: function () {
+          onReady: function (event) {
+            mainPlayer = event.target;
             checkCurrentFocus();
+            // Immediate autoplay if currently in viewport
+            if (mainVideoContainer) {
+              const rect = mainVideoContainer.getBoundingClientRect();
+              if (rect.top < window.innerHeight && rect.bottom > 0) {
+                playExclusive('main');
+              }
+            }
           },
           onStateChange: function (event) {
             // If visitor directly clicks play on the iframe, make it exclusive
@@ -227,20 +229,9 @@
 
       try {
         const player = new YT.Player(short.elementId, {
-          videoId: short.id,
-          playerVars: {
-            autoplay: 1,
-            mute: 1,
-            playsinline: 1,
-            controls: 0,
-            rel: 0,
-            modestbranding: 1,
-            enablejsapi: 1,
-            loop: 1,
-            playlist: short.id
-          },
           events: {
-            onReady: function () {
+            onReady: function (event) {
+              shortPlayers[index] = event.target;
               checkCurrentFocus();
             },
             onStateChange: function (event) {
@@ -312,13 +303,13 @@
     let minDistance = Infinity;
 
     // 1. Check Main Video Container
-    if (mainVideoContainer && mainPlayer) {
+    if (mainVideoContainer) {
       const rect = mainVideoContainer.getBoundingClientRect();
-      const inView = rect.top < windowH * 0.85 && rect.bottom > windowH * 0.15;
+      const inView = rect.top < windowH * 0.95 && rect.bottom > windowH * 0.05;
       if (inView) {
         const centerY = (rect.top + rect.bottom) / 2;
         const centerX = (rect.left + rect.right) / 2;
-        const dist = Math.hypot(centerX - viewportCenterX, (centerY - viewportCenterY) * 1.4);
+        const dist = Math.hypot(centerX - viewportCenterX, centerY - viewportCenterY);
         if (dist < minDistance) {
           minDistance = dist;
           closestId = 'main';
@@ -329,15 +320,14 @@
     // 2. Check Each Reel Card
     SHORTS_CONFIG.forEach((short, index) => {
       const card = document.getElementById(short.cardId);
-      const player = shortPlayers[index];
-      if (!card || !player) return;
+      if (!card) return;
 
       const rect = card.getBoundingClientRect();
-      const inView = rect.top < windowH * 0.85 && rect.bottom > windowH * 0.15;
+      const inView = rect.top < windowH * 0.95 && rect.bottom > windowH * 0.05;
       if (inView) {
         const centerY = (rect.top + rect.bottom) / 2;
         const centerX = (rect.left + rect.right) / 2;
-        const dist = Math.hypot(centerX - viewportCenterX, (centerY - viewportCenterY) * 1.4);
+        const dist = Math.hypot(centerX - viewportCenterX, centerY - viewportCenterY);
         if (dist < minDistance) {
           minDistance = dist;
           closestId = index;
@@ -354,7 +344,47 @@
   }
 
   /**
-   * Scroll and Intersection Manager
+   * Intersection Observers for Instant Viewport Visibility
+   */
+  function setupIntersectionObservers() {
+    if (!('IntersectionObserver' in window)) return;
+
+    // Main featured video
+    if (mainVideoContainer) {
+      const mainObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              checkCurrentFocus();
+            } else if (currentActiveId === 'main') {
+              pauseAll();
+            }
+          });
+        },
+        { threshold: [0, 0.1, 0.25], rootMargin: '60px 0px 60px 0px' }
+      );
+      mainObserver.observe(mainVideoContainer);
+    }
+
+    // Reel cards
+    const cards = document.querySelectorAll('.reel-card, .short-card');
+    if (cards.length > 0) {
+      const reelsObserver = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              checkCurrentFocus();
+            }
+          });
+        },
+        { threshold: [0, 0.1, 0.25], rootMargin: '60px 0px 60px 0px' }
+      );
+      cards.forEach(c => reelsObserver.observe(c));
+    }
+  }
+
+  /**
+   * Scroll and Resize Focus Manager
    */
   function setupScrollAndFocusManager() {
     window.addEventListener(
