@@ -690,6 +690,7 @@ input, select, textarea {
   background: linear-gradient(135deg, rgba(255, 99, 46, 0.4) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 99, 46, 0.2) 100%);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 99, 46, 0.22);
   transition: box-shadow var(--transition-base);
+  scroll-margin-top: 80px;
 }
 
 .featured-video-frame:hover {
@@ -879,6 +880,19 @@ input, select, textarea {
   margin-left: 0.2rem;
 }
 
+.stat-suffix-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-left: 0.45rem;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.stat-suffix-text .stat-accent {
+  color: var(--primary-orange);
+}
+
 .stat-heading-text {
   font-size: clamp(2rem, 3.2vw, 2.65rem);
   font-weight: 900;
@@ -926,6 +940,10 @@ input, select, textarea {
   }
   .stat-heading-text {
     font-size: 2.1rem;
+  }
+  .stat-suffix-text {
+    font-size: 1.15rem;
+    margin-left: 0.35rem;
   }
 }
 
@@ -1092,21 +1110,68 @@ input, select, textarea {
 }
 
 @media (max-width: 768px) {
-  .reels-grid {
+  .reels-grid,
+  .shorts-grid-reels {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.25rem;
-    max-width: 360px;
+    gap: 2rem;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
   }
 
   .reel-card,
   .short-card {
-    flex: 1 1 100%;
+    flex: 0 0 auto;
+    /* Proper mobile scale so the full 9:16 frame is always visible without clipping */
+    width: min(265px, calc((100vh - 200px) * 9 / 16), 75vw);
+    max-width: min(265px, calc((100vh - 200px) * 9 / 16), 75vw);
+    min-width: 0;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    scroll-margin-top: 80px;
+    scroll-margin-bottom: 80px;
+  }
+
+  .reel-card:hover,
+  .short-card:hover {
+    transform: none;
+  }
+
+  .reel-video-container-9x16,
+  .short-video-container-9x16 {
     width: 100%;
-    max-width: 360px;
+    aspect-ratio: 9 / 16;
+  }
+
+  .short-info-box {
+    padding: 0.75rem 0.95rem;
+    gap: 0.2rem;
+  }
+
+  .short-author-name {
+    font-size: 0.95rem;
+  }
+
+  .short-story-highlight {
+    font-size: 0.78rem;
+  }
+
+  .short-quote {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .short-tag-pill {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .reel-header-overlay,
+  .short-header-overlay {
+    top: 0.5rem;
+    left: 0.5rem;
   }
 
   .section-title {
@@ -1115,6 +1180,14 @@ input, select, textarea {
 
   .section-subtitle {
     font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reel-card,
+  .short-card {
+    width: min(250px, calc((100vh - 190px) * 9 / 16), 74vw);
+    max-width: min(250px, calc((100vh - 190px) * 9 / 16), 74vw);
   }
 }
 
